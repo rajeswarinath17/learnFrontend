@@ -1,3 +1,4 @@
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 
@@ -34,6 +35,8 @@ const App = () => {
     setLoading(false)
 
     setTitle("")
+    toast.success("Todo added successfully! 🎉");
+
   };
 
 
@@ -44,6 +47,8 @@ const App = () => {
 
   //  setTodos([])
     getTodos()
+    toast.success("Todo deleted successfully! 🗑️");
+
   }
 
    useEffect(() => {
@@ -51,7 +56,9 @@ const App = () => {
   }, [])
 
   return (
-    
+    <>
+    <Toaster />
+
   <div className="min-h-screen bg-gray-100 p-8">
     <div className="max-w-2xl mx-auto">
 
@@ -109,8 +116,9 @@ const App = () => {
 
     </div>
   </div>
+  </>
 );
-    
+  
 };
 
 export default App;
