@@ -1,18 +1,23 @@
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
+import "./index.css";
 
 const App = () => {
 
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('')
-  const [loading, setLoading] = useState(false)  
+  const [loading, setLoading] = useState(true)  
 
   // ----------- GET ------------
   const getTodos = async () => {
+    // setLoading(true)
+
     const response = await axios.get("https://rncore.onrender.com/api/v2/rn_1b50db97fe17ac33d7cc674b5eca1cab/todos");
     setTodos(response.data.todos)
     console.log(response.data.todos)
+
+    setLoading(false)
     
   }
 
@@ -56,8 +61,12 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <div className="relative ">
     <Toaster />
+      <div className="absolute left-1/2 ml-40 top-1/2">
+    {loading && <div className="loader"></div>
+     }
+  </div>
 
   <div className="min-h-screen bg-gray-100 p-8">
     <div className="max-w-2xl mx-auto">
@@ -116,7 +125,7 @@ const App = () => {
 
     </div>
   </div>
-  </>
+  </div>
 );
   
 };
